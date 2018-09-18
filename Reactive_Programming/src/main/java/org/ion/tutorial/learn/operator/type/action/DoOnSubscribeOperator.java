@@ -2,7 +2,7 @@ package org.ion.tutorial.learn.operator.type.action;
 
 import io.reactivex.Observable;
 
-public class DoOnSUbscribeOperator {
+public class DoOnSubscribeOperator {
 	public static void main(String[] args) {
 		Observable.just("Alpha", "Beta", "Gamma", "Delta", "Epsilon")
 				.doOnSubscribe(d -> System.out.println("Subscribing!"))

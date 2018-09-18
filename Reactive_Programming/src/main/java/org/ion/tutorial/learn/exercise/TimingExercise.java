@@ -12,12 +12,14 @@ public class TimingExercise {
                     for (int i = 0; i < 10; i++) {
                         emitter.onNext(getRandomNumber(5));
                     }
+                    emitter.onComplete();
                 })
                 .doOnNext(s -> System.out.println("Processing: " + s))
                 .concatMap(x ->
                         Observable
                                 .just(x)
                                 .delay(getRandomNumber(5), TimeUnit.SECONDS)
+                                .doOnComplete(() -> System.out.println("Source is done emitting!"))
                 );
 
         source.subscribe(System.out::println);
