@@ -7,6 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TimingExercise {
     public static void main(String args[]) throws InterruptedException {
+
+        Observable.fromCallable(() -> new Random().nextInt(1000))
+                .flatMap(x -> Observable.timer(x, TimeUnit.MILLISECONDS))
+                .map(x -> new Random().nextDouble())
+                .repeat(10)
+                .subscribe(System.out::println);
+
         Observable source = Observable
                 .create(emitter -> {
                     for (int i = 0; i < 10; i++) {
